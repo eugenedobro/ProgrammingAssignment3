@@ -29,7 +29,7 @@ pn <- "Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia"
 outc <- ha
 
 df1 <- data.frame()
-df1 <- df[complete.cases(as.numeric(df[,11])),]
+df1 <- df[complete.cases(as.numeric(df[,ha])),]
 tail(df1)
 
 x <- as.numeric(df1[,outc])
@@ -59,3 +59,25 @@ as.numeric(tapply(x, z == "TX", min)[2])
 df2 <- data.frame()
 df2 <- df[complete.cases(as.numeric(df[,ha])),]
 
+
+tail(df2)
+df[1,2]
+
+tapply(as.numeric(df2[,ha]), as.factor(df2[, 7]) == "TX", min)[2]
+
+
+##WORKING!!!!
+
+df <- read.csv("outcome-of-care-measures.csv", colClasses = "character")
+ha <- "Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack"
+df2 <- df[complete.cases(as.numeric(df[,ha])),]
+
+df3 <- df2[which(as.factor(df2[, 7]) == "TX"), ]
+df4 <- df3[which(as.numeric(df3[,ha]) == min(as.numeric(df3[,ha]))), ]
+as.numeric(df4[,11])
+df4[2]
+
+df3[,2]
+df3[,7]
+df3[,11]
+min(as.numeric(df3[,ha]))
